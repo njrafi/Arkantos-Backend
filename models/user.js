@@ -22,6 +22,11 @@ const userSchema = new Schema({
 		type: String,
 		required: false,
 	},
+	favoriteGames: [
+		{
+			type: Object,
+		},
+	],
 });
 
 module.exports = mongoose.model("User", userSchema);

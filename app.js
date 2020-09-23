@@ -8,6 +8,7 @@ const cors = require("cors");
 const errorMiddlewares = require("./middlewares/errors");
 
 const authRoutes = require("./routes/auth");
+const gamesRoutes = require("./routes/games");
 
 const app = express();
 app.use(morgan("dev"));
@@ -16,8 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 // Register routes here
-// Dummy route
 app.use("/auth", authRoutes);
+app.use("/games", gamesRoutes);
 app.get("/", (req, res) => {
 	res.json({
 		message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
