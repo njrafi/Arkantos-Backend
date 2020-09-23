@@ -19,7 +19,7 @@ const userSchema = new Schema({
 		required: false,
 	},
 	providerId: {
-		type: Number,
+		type: String,
 		required: false,
 	},
 });
