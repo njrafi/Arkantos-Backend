@@ -17,7 +17,6 @@ exports.postFavoriteGames = async (req, res, next) => {
 		const response = {
 			message: "Favorite Games Updates",
 		};
-		console.log(process.env.NODE_ENV === "production" ? "🎉" : response, user);
 		return res.status(200).json(response);
 	} catch (err) {
 		next(err);
@@ -31,7 +30,7 @@ exports.getFavoriteGames = async (req, res, next) => {
 		const user = await User.findOne({ token: userToken });
 		if (!user) {
 			const response = {
-				message: "User not found",
+				message: "Invalid userToken",
 			};
 			console.log(process.env.NODE_ENV === "production" ? "🎉" : response);
 			return res.status(401).json(response);
@@ -40,7 +39,12 @@ exports.getFavoriteGames = async (req, res, next) => {
 			userToken: userToken,
 			favoriteGames: user.favoriteGames,
 		};
-		console.log(process.env.NODE_ENV === "production" ? "🎉" : response);
+		console.log(
+			process.env.NODE_ENV === "production"
+				? "🎉"
+				: "Get FavoriteGames Retrieved: ",
+			user.favoriteGames.length
+		);
 		return res.status(200).json(response);
 	} catch (err) {
 		next(err);
