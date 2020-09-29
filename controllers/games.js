@@ -1,7 +1,8 @@
 const User = require("../models/user");
 
 exports.postFavoriteGames = async (req, res, next) => {
-	const { userToken, favoriteGames } = req.body;
+    const { userToken, favoriteGames } = req.body;
+    console.log(`Post Favorite Games, userToken: ${userToken}, favoriteGamesCount: ${favoriteGames.length}`)
 	try {
 		const user = await User.findOne({ token: userToken });
 		if (!user) {
@@ -25,7 +26,8 @@ exports.postFavoriteGames = async (req, res, next) => {
 };
 
 exports.getFavoriteGames = async (req, res, next) => {
-	const userToken = req.params.userToken;
+    const userToken = req.params.userToken;
+    console.log(`get Favorite Games, userToken: ${userToken}`)
 	try {
 		const user = await User.findOne({ token: userToken });
 		if (!user) {
