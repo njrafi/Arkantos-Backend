@@ -9,6 +9,7 @@ const errorMiddlewares = require("./middlewares/errors");
 
 const authRoutes = require("./routes/auth");
 const gamesRoutes = require("./routes/games");
+const profileRoutes = require("./routes/profile");
 
 const app = express();
 app.use(morgan("dev"));
@@ -19,6 +20,7 @@ app.use(express.json());
 // Register routes here
 app.use("/auth", authRoutes);
 app.use("/games", gamesRoutes);
+app.use("/profile", profileRoutes);
 app.get("/", (req, res) => {
 	res.json({
 		message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
