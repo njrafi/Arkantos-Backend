@@ -1,12 +1,7 @@
 const { request } = require("express");
 const User = require("../models/user");
 const firebase = require("../utils/firebase");
-
-const updatePicture = async (newPicture, imageName) => {
-	const downloadUrl = await firebase.uploadImage(newPicture, imageName);
-	console.log(downloadUrl);
-	return downloadUrl;
-};
+const shortHash = require("short-hash");
 
 const updateProfile = async (req, res, next) => {
 	const { token, name, email, photoUrl, providerId } = req.body;
@@ -18,14 +13,13 @@ const updateProfile = async (req, res, next) => {
 			});
 		}
 
-		const imageName = "hudai/gg2";
 		if (
 			photoUrl != undefined &&
 			photoUrl.length > 0 &&
 			photoUrl != user.photoUrl
 		) {
 			const newPicture = photoUrl;
-			user.photoUrl = await updatePicture(newPicture, imageName);
+			user.photoUrl = await updateProfilePicture(newPicture, token);
 		}
 
 		user.name = name;
@@ -42,4 +36,11 @@ const updateProfile = async (req, res, next) => {
 	}
 };
 
-module.exports = { updatePicture, updateProfile };
+const updateProfilePicture = async (newPicture, token) => {
+	await firebase.deleteFileWithPrefix(shortHash(token));
+	const imageName = shortHash(token) + "/" + Date.now();
+	const downloadUrl = await firebase.uploadImage(newPicture, imageName);
+	return downloadUrl;
+};
+
+module.exports = { updateProfilePicture, updateProfile };
