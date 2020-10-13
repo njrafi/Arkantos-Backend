@@ -4,7 +4,7 @@
   "description": "Backend for Arkantos app",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --timeout 5000",
+    "test": "mocha --timeout 5000 -r dotenv/config",
     "start": "nodemon app.js"
   },
   "author": "NJRafi",

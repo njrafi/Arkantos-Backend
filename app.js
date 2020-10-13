@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const fileOperations = require("./utils/fileOperations");
 require("dotenv").config();
 const cors = require("cors");
 
@@ -15,7 +16,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
-app.use(express.json({limit: '10mb'}));
+app.use(express.json({ limit: "10mb" }));
 
 // Register routes here
 app.use("/auth", authRoutes);
@@ -41,5 +42,6 @@ mongoose
 		console.log("connected to mongoDb Database");
 		console.log("server started at port " + process.env.PORT || 4000);
 		app.listen(process.env.PORT || 4000);
+		//fileOperations.writeServiceJsonFile();
 	})
 	.catch((err) => console.log(err));

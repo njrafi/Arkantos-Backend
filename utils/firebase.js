@@ -1,9 +1,10 @@
 const admin = require("firebase-admin");
 const stream = require("stream");
-const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
+	credential: admin.credential.cert(
+		JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+	),
 	storageBucket: "arkantos-1.appspot.com/",
 });
 
