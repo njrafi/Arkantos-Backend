@@ -1,7 +1,6 @@
 const { request } = require("express");
 const User = require("../models/user");
 const firebase = require("../utils/firebase");
-const shortHash = require("short-hash");
 
 const updateProfile = async (req, res, next) => {
 	const { token, name, email, photoUrl, providerId } = req.body;
@@ -37,8 +36,8 @@ const updateProfile = async (req, res, next) => {
 };
 
 const updateProfilePicture = async (newPicture, token) => {
-	await firebase.deleteFileWithPrefix(shortHash(token));
-	const imageName = shortHash(token) + "/" + Date.now();
+	await firebase.deleteFileWithPrefix(token);
+	const imageName = token + "/" + Date.now();
 	const downloadUrl = await firebase.uploadImage(newPicture, imageName);
 	return downloadUrl;
 };
