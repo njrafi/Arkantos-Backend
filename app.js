@@ -15,7 +15,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: '10mb'}));
 
 // Register routes here
 app.use("/auth", authRoutes);

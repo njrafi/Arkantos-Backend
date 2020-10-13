@@ -4,12 +4,13 @@
   "description": "Backend for Arkantos app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 5000",
     "start": "nodemon app.js"
   },
   "author": "NJRafi",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/storage": "^5.3.0",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
