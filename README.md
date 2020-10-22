@@ -1,2 +1,2 @@
 # Arkantos-Backend
-Backend for Arkantos
+Backend for Arkantos : https://github.com/njrafi/Arkantos
